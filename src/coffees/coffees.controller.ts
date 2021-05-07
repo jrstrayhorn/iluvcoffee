@@ -12,6 +12,8 @@ import {
   Res,
 } from '@nestjs/common';
 import { CoffeesService } from './coffees.service';
+import { CreateCoffeeDto } from './dto/create-coffee.dto';
+import { UpdateCoffeeDto } from './dto/update-coffee.dto';
 
 // 'coffees' ties route /coffees to this controller
 // still need HTTP verb method
@@ -50,8 +52,8 @@ export class CoffeesController {
   //   return body;
   // }
   @Post()
-  create(@Body() body) {
-    return this.coffeesService.create(body);
+  create(@Body() createCoffeeDto: CreateCoffeeDto) {
+    return this.coffeesService.create(createCoffeeDto);
   }
 
   // posting and getting specific portion of body
@@ -65,9 +67,9 @@ export class CoffeesController {
   // put -  replaces entire resource - need whole object in request payload
   // patch - can update specific portion of object - can pass small portion of whole object in request
   @Patch(':id')
-  update(@Param('id') id: string, @Body() body) {
+  update(@Param('id') id: string, @Body() updateCoffeeDto: UpdateCoffeeDto) {
     // return `this action updates ${id} coffee`;
-    return this.coffeesService.update(id, body);
+    return this.coffeesService.update(id, updateCoffeeDto);
   }
 
   @Delete(':id')

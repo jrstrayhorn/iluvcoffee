@@ -1,0 +1,88 @@
+Introduction to NestJS
+Comps with Express
+    Nothing by default
+    Barebones
+    Dev in charge of setting up everything - like React
+    Around for many years
+    Express helps but require lots of config and effort
+    Flexibility can present problems
+NestJS
+    Creates framework around node.js
+    Focus on app instead of implementation details
+    Out of box app architecture
+    Scalable
+    Loosley-coupled
+    Testable
+    Maintainable
+How?
+    It’s a layer above Node.JS
+NestJS
+    Doesn’t lock you in
+    Can use plugins from others like Fastify, Express, etc
+Nest can swap to use Fastify or Express if you want
+Platform Agnosticism
+    Express / Fastify
+And types of apps
+    Rest APIs
+    MVC
+    Microservices
+    Web Sockets
+    GraphQL
+    Cron job
+    CLI
+Create REST API in this course!!
+
+Nest CLI
+    Help to generate, build run, bundle, add elements
+    Kind of like the Angular CLI
+
+In the code folder
+Src
+    Main.ts - main starting file for app -
+    AppModule - root module, can contain other small modules
+    Decorator - function that applies logic
+    Decorators used extensively!
+    Module decorator - controllers, providers
+    Controller decorator - specific requests handled by application
+    AppService provider - separate business logic with DI
+
+Insomnia - postman vs insomnia
+
+Error Method per 
+    NotFoundException
+    InternalException
+    BadRequestException
+
+Built in exception layer
+    if you just throw or any throw the exception layer will always bubble up the exception
+    will see error log [ExceptionsHandler] w/ error message
+
+Modules are recommend to organize app
+    should have multiple modules with capabilities
+    Shopping Cart
+        same app domain
+        this is a perfect example for own feature module
+    Encapsulate to module
+    npx nest g module coffees
+    4 main metadata properties for object parameter for @Module decorator
+        controllers - api routes
+        exports - providers for this module than are available to other modules
+        imports - list other modules that this module required
+        providers - list services that need to be instantiated via DI for this module
+
+DTO - define shape and interface for our request/response bodies
+    for our payload
+    .dto - plain class naming convention as a best practice
+    dto folder
+    interface / dto / entities should be their own folder in own module
+    dto - simple class that creates properties no logic
+    mark the properties as readonly for immutability
+
+Validate DTO
+    DTO provide type safety
+    but we need to make sure the data is validated
+    need to validate the correctness of data
+    should be automatic
+    ValidationPipe
+        provide validation rules for all client payload
+        use anonation in dto

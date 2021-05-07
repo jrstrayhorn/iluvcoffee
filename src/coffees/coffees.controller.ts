@@ -53,7 +53,11 @@ export class CoffeesController {
   // }
   @Post()
   create(@Body() createCoffeeDto: CreateCoffeeDto) {
-    return this.coffeesService.create(createCoffeeDto);
+    // whiltelist: true on validation pipe
+    // ensure that only the values valid for coffeDto
+    // is received, used and returned
+    this.coffeesService.create(createCoffeeDto);
+    return createCoffeeDto;
   }
 
   // posting and getting specific portion of body

@@ -102,3 +102,10 @@ Validate DTO
 ValidationPipe
     can filter out message that should not be received via whitelisting
     any properties not includes stripped away
+    whiteList : true 
+    why?
+        user gives invalid properties, this will make sure unwanted
+        properties or unwanted and removed!!
+    we can also stop request, if non whitelist value are included
+        this will return an error
+        forbidNonWhitelisted: true

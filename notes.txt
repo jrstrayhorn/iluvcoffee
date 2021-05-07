@@ -86,3 +86,19 @@ Validate DTO
     ValidationPipe
         provide validation rules for all client payload
         use anonation in dto
+    To get setup using ValidationPipe
+        1. main.ts - add app.useGlobalPipes(new ValidationPipe());
+        2. add 2 packages
+            npm i class-validator class-transformer
+
+    ** - class-validator package - check the documentation!!
+
+    @nestjs/mapped-types - helper library
+    paritaltype - return turns all the properties of the type input
+        being optional
+        also inherits the validation rules via decoarator
+        add additional validation of isOptional on the fly
+
+ValidationPipe
+    can filter out message that should not be received via whitelisting
+    any properties not includes stripped away

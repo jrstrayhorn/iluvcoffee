@@ -7,6 +7,7 @@ async function bootstrap() {
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
+      transform: true, // does primative type converstion for boolean/numbers, slight performance hit doing this so weight the cost if needed
       forbidNonWhitelisted: true,
     }),
   );

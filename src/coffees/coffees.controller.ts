@@ -38,12 +38,14 @@ export class CoffeesController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id') id: number) {
+    // validation pipe will try to convert the string to number with transform is true
     // just @Param() params gives us all items in request parameters
     // so we'd need to do params.id to get value
     // give value in @Param() to get specific parameter
     // return `This action returns ${id} coffee`;
-    return this.coffeesService.findOne(id);
+    console.log(typeof id);
+    return this.coffeesService.findOne('' + id);
   }
 
   // @Post()
@@ -56,6 +58,10 @@ export class CoffeesController {
     // whiltelist: true on validation pipe
     // ensure that only the values valid for coffeDto
     // is received, used and returned
+
+    // without validation pipe - dto is the shape of the type
+    // but not an instance of the type
+    console.log(createCoffeeDto instanceof CreateCoffeeDto);
     this.coffeesService.create(createCoffeeDto);
     return createCoffeeDto;
   }

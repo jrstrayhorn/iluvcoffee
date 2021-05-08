@@ -109,3 +109,30 @@ ValidationPipe
     we can also stop request, if non whitelist value are included
         this will return an error
         forbidNonWhitelisted: true
+
+Containers
+    Docker - build, run share apps in Containers
+    containerization has become popular for dev process
+    felxibile, lightwieght, portable (build local, deploy anywhere), loosely coupled
+    running process with encapsulation features - isolated from host
+    docker and docker compose
+    docker compose use yaml for application services
+    with single command can create, build and run and any app on any machine
+    easy to share and setup in the cloud
+
+Get DB setup
+    npm i @nestjs/typeorm typeorm (either pg or mysql2)
+
+TypeOrm automatically uses Repository pattern
+
+Creating Relationships between entities
+
+- 1 to 1 = Coffee => Coffee Details, onetoone decorator
+
+- 1 to many = Coffee Brand - Coffee, onetomany decorator
+
+- many to many = Coffe => Flavor, manytomany decorator
+
+Relations are not eagerly loaded by default
+
+Cascading Insert!

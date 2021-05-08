@@ -11,6 +11,7 @@ import {
   Query,
   Res,
 } from '@nestjs/common';
+import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 import { CoffeesService } from './coffees.service';
 import { CreateCoffeeDto } from './dto/create-coffee.dto';
 import { UpdateCoffeeDto } from './dto/update-coffee.dto';
@@ -23,7 +24,7 @@ export class CoffeesController {
   // readonly so we won't be able to change it
   constructor(private readonly coffeesService: CoffeesService) {}
   @Get()
-  findAll(@Query() paginationQuery) {
+  findAll(@Query() paginationQuery: PaginationQueryDto) {
     // findAll(@Res() response) {
     // using the underlining response object from express or fastify
     // provides great flexibility to mess with headers etc
@@ -33,7 +34,7 @@ export class CoffeesController {
     // best practice use nest standard approach
     // response.status(200).send('this action returns all coffees');
     const { limit, offset } = paginationQuery;
-    return this.coffeesService.findAll();
+    return this.coffeesService.findAll(paginationQuery);
     // return `This action returns all coffees. Limit: ${limit}, offset: ${offset}`;
   }
 
@@ -44,7 +45,7 @@ export class CoffeesController {
     // so we'd need to do params.id to get value
     // give value in @Param() to get specific parameter
     // return `This action returns ${id} coffee`;
-    console.log(typeof id);
+    // console.log(typeof id);
     return this.coffeesService.findOne('' + id);
   }
 
@@ -61,7 +62,7 @@ export class CoffeesController {
 
     // without validation pipe - dto is the shape of the type
     // but not an instance of the type
-    console.log(createCoffeeDto instanceof CreateCoffeeDto);
+    // console.log(createCoffeeDto instanceof CreateCoffeeDto);
     this.coffeesService.create(createCoffeeDto);
     return createCoffeeDto;
   }

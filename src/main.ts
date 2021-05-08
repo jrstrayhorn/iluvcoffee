@@ -9,6 +9,9 @@ async function bootstrap() {
       whitelist: true,
       transform: true, // does primative type converstion for boolean/numbers, slight performance hit doing this so weight the cost if needed
       forbidNonWhitelisted: true,
+      transformOptions: {
+        enableImplicitConversion: true, // will automatically convert to TS type - dont need to use @Type decorator on dtos
+      },
     }),
   );
   await app.listen(3000);

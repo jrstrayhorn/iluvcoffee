@@ -22,6 +22,9 @@ export class Coffee {
   @Column()
   brand: string;
 
+  @Column({ default: 0 })
+  recommendations: number;
+
   // // stories arrays as json, and make nullable
   // @Column('json', { nullable: true })
   // flavors: string[];

@@ -136,3 +136,17 @@ Creating Relationships between entities
 Relations are not eagerly loaded by default
 
 Cascading Insert!
+
+Both operations need to be successful
+    need a transaction
+    unit of work
+    reliable way to do multiple tasks together
+    use query runner class for full control
+    events stuff should be in event module
+
+Index
+    lookup table used by db to speed up data retrieval
+    common search is on name
+    to speed up the search query we can put index on name
+    complex: might want composite index for multiple columns
+    definitely use when performance is critical

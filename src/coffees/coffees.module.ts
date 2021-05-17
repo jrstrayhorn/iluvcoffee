@@ -9,6 +9,10 @@ import { Flavor } from './entities/flavor.entity';
 
 class MockCoffeesService {}
 
+class ConfigService {}
+class DevelopmentConfigService {}
+class ProductionConfigService {}
+
 @Module({
   // registers TypeOrmModule in child feature
   // pass in array of entities
@@ -20,6 +24,13 @@ class MockCoffeesService {}
     //   provide: CoffeesService,
     //   useValue: new MockCoffeesService(),
     // },
+    {
+      provide: ConfigService,
+      useClass:
+        process.env.NODE_ENV === 'development'
+          ? DevelopmentConfigService
+          : ProductionConfigService,
+    },
     {
       provide: COFFEE_BRANDS,
       useValue: ['buddy brew', 'nescafe'],

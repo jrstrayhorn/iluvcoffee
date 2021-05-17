@@ -209,5 +209,9 @@ Example advanced use-cases where we might need Custom Providers:
 3. How about if we want to override a class with a mock version for testing
 4. And lastly, what if we want to use a Strategy Pattern in which we can provide an abstract class and interchange the real implementation (or actual class that is to be used) based on different conditions
 
+Provider token
+    can be classname, string or constant
 
+Using constructor dependency injection its assumed that provider
+is class based
 

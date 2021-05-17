@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Injectable, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Event } from 'src/events/entities/event.entity';
 import { COFFEE_BRANDS } from './coffees.constants';
@@ -13,6 +13,14 @@ class ConfigService {}
 class DevelopmentConfigService {}
 class ProductionConfigService {}
 
+@Injectable()
+export class CoffeeBrandsFactory {
+  create() {
+    /* ... do something ... */
+    return ['buddy brew', 'nescafe'];
+  }
+}
+
 @Module({
   // registers TypeOrmModule in child feature
   // pass in array of entities
@@ -24,6 +32,7 @@ class ProductionConfigService {}
     //   provide: CoffeesService,
     //   useValue: new MockCoffeesService(),
     // },
+    CoffeeBrandsFactory,
     {
       provide: ConfigService,
       useClass:
@@ -31,9 +40,15 @@ class ProductionConfigService {}
           ? DevelopmentConfigService
           : ProductionConfigService,
     },
+    // {
+    //   provide: COFFEE_BRANDS,
+    //   useValue: ['buddy brew', 'nescafe'],
+    // },
     {
       provide: COFFEE_BRANDS,
-      useValue: ['buddy brew', 'nescafe'],
+      useFactory: (brandsFactory: CoffeeBrandsFactory) =>
+        brandsFactory.create(),
+      inject: [CoffeeBrandsFactory], // passed into useFactory function
     },
   ],
   exports: [CoffeesService],

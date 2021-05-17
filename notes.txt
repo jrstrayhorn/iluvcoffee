@@ -234,3 +234,11 @@ Request - new instance of provider for each incoming request
         @Inject(REQUEST) private readonly request: Request
             can get request info from this parameter in a constructor
 
+Config
+
+- Development vs Staging vs Production
+store in process env object
+NEST gives NESTJSConfig
+
+joi package can validate json objects against a schema - hmmm...
+    @hapi/joi

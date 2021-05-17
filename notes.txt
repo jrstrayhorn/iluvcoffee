@@ -228,3 +228,9 @@ Request - new instance of provider for each incoming request
      automatically garage collected
      Scope.REQUEST
 
+     scopes bubble up so if service is request then controller scope is request
+
+    can get request specific information - using Request scope can cause performance issues
+        @Inject(REQUEST) private readonly request: Request
+            can get request info from this parameter in a constructor
+

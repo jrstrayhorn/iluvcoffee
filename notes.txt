@@ -202,5 +202,12 @@ Module Encapsulation
     - exports provider is the Public API
 
 Custom Providers
+Example advanced use-cases where we might need Custom Providers:
+
+1. Creating a custom instance of our provider instead of having Nest instantiate the class for us
+2. Or let’s say we want to reuse an existing class in a second dependency
+3. How about if we want to override a class with a mock version for testing
+4. And lastly, what if we want to use a Strategy Pattern in which we can provide an abstract class and interchange the real implementation (or actual class that is to be used) based on different conditions
+
 
 

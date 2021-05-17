@@ -215,3 +215,16 @@ Provider token
 Using constructor dependency injection its assumed that provider
 is class based
 
+Singleton instance is safe
+
+Provider might need request
+- instance request tracking or multi-tenant
+
+By default every provider is a singleton
+
+Transient is not shared.. new instance per provider
+
+Request - new instance of provider for each incoming request
+     automatically garage collected
+     Scope.REQUEST
+

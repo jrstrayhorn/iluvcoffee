@@ -4,6 +4,7 @@ import {
   Inject,
   Injectable,
   NotFoundException,
+  Scope,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
@@ -15,6 +16,8 @@ import { UpdateCoffeeDto } from './dto/update-coffee.dto';
 import { Coffee } from './entities/coffee.entity';
 import { Flavor } from './entities/flavor.entity';
 
+// how to change scope
+//@Injectable({ scope: Scope.TRANSIENT })
 @Injectable()
 export class CoffeesService {
   // private coffees: Coffee[] = [
@@ -34,7 +37,8 @@ export class CoffeesService {
     private readonly connection: Connection,
     @Inject(COFFEE_BRANDS) coffeeBrands: string[],
   ) {
-    console.log(coffeeBrands);
+    // console.log(coffeeBrands);
+    console.log('CoffeeService instantiated');
   }
 
   findAll(paginationQuery: PaginationQueryDto) {

@@ -176,3 +176,31 @@ Migrations
     - npm run build - again so migration.ts file convert to .js
     - npx typeorm migration:run
 
+Dependency Injection
+    - NestJS run time is an IOC container
+    - ask for Dependency, nestjs retrieves object with dependencies
+    - 1. in coffe service, declare class with @Injectable() tells nest to put into container
+        marks as a provider
+    - 2. in CoffeesController, we request our class in the constructor
+        tells Nest to inject provider
+    - 3. register service as provider in the module - coffess.module.ts
+    - instantiated controller - are there any classes that need to be provided?
+        looks up by the token, will create an instance and cache or return existing class
+    - NEST does this during app bootstraping
+    - transitive so resolved bottom up in the right order
+    - don't need to manage dependency graph
+    - listing providers: [CoffesService] is shorthand for this
+        {
+            provide: CoffeesService, // this is the token
+            useClass: CoffeesService
+        }
+
+Module Encapsulation
+    - NEST encapsulate providers in a module so impossible to use
+         provider unless listed in module or export from another module
+         that has been imported
+    - exports provider is the Public API
+
+Custom Providers
+
+

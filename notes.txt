@@ -245,3 +245,5 @@ joi package can validate json objects against a schema - hmmm...
 
 ConfigModule
 - configService has get method to get config variables
+
+custom config files can group setting together

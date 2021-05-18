@@ -7,6 +7,7 @@ import { CoffeeRatingModule } from './coffee-rating/coffee-rating.module';
 import { DatabaseModule } from './database/database.module';
 import { ConfigModule } from '@nestjs/config';
 import * as Joi from '@hapi/joi';
+import appConfig from './config/app.config';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import * as Joi from '@hapi/joi';
         DATABASE_HOST: Joi.required(),
         DATABASE_PORT: Joi.number().default(3306),
       }),
+      load: [appConfig],
       // envFilePath: '.environment', // can set custom env file path
       // ignoreEnvFile: true // may want to do this for production since going to read from hosting variables instead of env file
     }), // will read process env files and environment variables

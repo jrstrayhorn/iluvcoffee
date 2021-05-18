@@ -46,10 +46,13 @@ export class CoffeesService {
     // every env variable is a string by default
     // will need to do type conversation ourselves
     // with 2nd param it will return that as a default if null
-    const databaseHost = this.configService.get<string>(
-      'DATABASE_HOST',
-      'localhost',
-    );
+    // example of directly accessing the process.env variable
+    // const databaseHost = this.configService.get<string>(
+    //   'DATABASE_HOST',
+    //   'localhost',
+    // );
+    // using dot notation is a path to traverse the custom object from appConfig
+    const databaseHost = this.configService.get('database.host', 'localhost');
     console.log(databaseHost);
   }
 

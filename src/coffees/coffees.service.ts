@@ -6,6 +6,7 @@ import {
   NotFoundException,
   Scope,
 } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 import { Event } from 'src/events/entities/event.entity';
@@ -36,9 +37,20 @@ export class CoffeesService {
     private readonly flavorRepository: Repository<Flavor>,
     private readonly connection: Connection,
     @Inject(COFFEE_BRANDS) coffeeBrands: string[],
+    private readonly configService: ConfigService,
   ) {
     // console.log(coffeeBrands);
     console.log('CoffeeService instantiated');
+    // see type <string>, real value is string
+    // regardless of type, get will always return a string
+    // every env variable is a string by default
+    // will need to do type conversation ourselves
+    // with 2nd param it will return that as a default if null
+    const databaseHost = this.configService.get<string>(
+      'DATABASE_HOST',
+      'localhost',
+    );
+    console.log(databaseHost);
   }
 
   findAll(paginationQuery: PaginationQueryDto) {

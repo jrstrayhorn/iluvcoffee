@@ -1,4 +1,5 @@
 import { Injectable, Module, Scope } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Event } from 'src/events/entities/event.entity';
 import { Connection } from 'typeorm';
@@ -10,7 +11,7 @@ import { Flavor } from './entities/flavor.entity';
 
 class MockCoffeesService {}
 
-class ConfigService {}
+class MyConfigService {}
 class DevelopmentConfigService {}
 class ProductionConfigService {}
 
@@ -25,7 +26,7 @@ export class CoffeeBrandsFactory {
 @Module({
   // registers TypeOrmModule in child feature
   // pass in array of entities
-  imports: [TypeOrmModule.forFeature([Coffee, Flavor, Event])],
+  imports: [TypeOrmModule.forFeature([Coffee, Flavor, Event]), ConfigModule],
   controllers: [CoffeesController],
   providers: [
     CoffeesService,
@@ -35,7 +36,7 @@ export class CoffeeBrandsFactory {
     // },
     CoffeeBrandsFactory,
     {
-      provide: ConfigService,
+      provide: MyConfigService,
       useClass:
         process.env.NODE_ENV === 'development'
           ? DevelopmentConfigService

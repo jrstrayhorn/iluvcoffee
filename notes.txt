@@ -242,3 +242,6 @@ NEST gives NESTJSConfig
 
 joi package can validate json objects against a schema - hmmm...
     @hapi/joi has been deprecated should use joi instead later
+
+ConfigModule
+- configService has get method to get config variables

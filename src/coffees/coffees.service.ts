@@ -6,12 +6,13 @@ import {
   NotFoundException,
   Scope,
 } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
+import { ConfigService, ConfigType } from '@nestjs/config';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 import { Event } from 'src/events/entities/event.entity';
 import { Connection, Repository } from 'typeorm';
 import { COFFEE_BRANDS } from './coffees.constants';
+import coffeesConfig from './config/coffees.config';
 import { CreateCoffeeDto } from './dto/create-coffee.dto';
 import { UpdateCoffeeDto } from './dto/update-coffee.dto';
 import { Coffee } from './entities/coffee.entity';
@@ -37,8 +38,10 @@ export class CoffeesService {
     private readonly flavorRepository: Repository<Flavor>,
     private readonly connection: Connection,
     @Inject(COFFEE_BRANDS) coffeeBrands: string[],
-    private readonly configService: ConfigService,
+    @Inject(coffeesConfig.KEY)
+    private readonly coffeesConfiguration: ConfigType<typeof coffeesConfig>,
   ) {
+    // instead of private readonly configService: ConfigService,
     // console.log(coffeeBrands);
     console.log('CoffeeService instantiated');
     // see type <string>, real value is string
@@ -52,8 +55,13 @@ export class CoffeesService {
     //   'localhost',
     // );
     // using dot notation is a path to traverse the custom object from appConfig
-    const databaseHost = this.configService.get('database.host', 'localhost');
-    console.log(databaseHost);
+    //const databaseHost = this.configService.get('database.host', 'localhost');
+    // will get the entire coffees config object
+    // there is a better way tho!
+    // const coffeesConfig = this.configService.get('coffees.foo');
+    // console.log(coffeesConfig);
+    // automatic infers the type giving us type safety and intellisense
+    console.log(coffeesConfiguration.foo);
   }
 
   findAll(paginationQuery: PaginationQueryDto) {

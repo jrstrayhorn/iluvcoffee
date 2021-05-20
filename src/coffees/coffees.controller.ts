@@ -14,6 +14,7 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
+import { Protocol } from 'src/common/decorators/protocol.decorator';
 import { Public } from 'src/common/decorators/public.decorator';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 import { ParseIntPipe } from 'src/common/pipes/parse-int.pipe';
@@ -34,7 +35,11 @@ export class CoffeesController {
   // @SetMetadata('isPublic', true) // should use custom decorator!!
   @Public()
   @Get()
-  async findAll(@Query() paginationQuery: PaginationQueryDto) {
+  async findAll(
+    @Protocol('https') protocol: string,
+    @Query() paginationQuery: PaginationQueryDto,
+  ) {
+    console.log(protocol);
     // findAll(@Res() response) {
     // using the underlining response object from express or fastify
     // provides great flexibility to mess with headers etc
@@ -43,7 +48,7 @@ export class CoffeesController {
     // code is also harder to test
     // best practice use nest standard approach
     // response.status(200).send('this action returns all coffees');
-    await new Promise((resolve) => setTimeout(resolve, 5000));
+    // await new Promise((resolve) => setTimeout(resolve, 5000));
     const { limit, offset } = paginationQuery;
     return this.coffeesService.findAll(paginationQuery);
     // return `This action returns all coffees. Limit: ${limit}, offset: ${offset}`;

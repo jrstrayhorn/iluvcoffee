@@ -10,6 +10,8 @@ import {
   Post,
   Query,
   Res,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 import { CoffeesService } from './coffees.service';
@@ -19,10 +21,13 @@ import { UpdateCoffeeDto } from './dto/update-coffee.dto';
 // 'coffees' ties route /coffees to this controller
 // still need HTTP verb method
 @Controller('coffees')
+//@UsePipes(new ValidationPipe()) // can pass in config object now, use class tho
 export class CoffeesController {
   // declare and init coffessService and keep scope to class only w/ private
   // readonly so we won't be able to change it
   constructor(private readonly coffeesService: CoffeesService) {}
+
+  @UsePipes(ValidationPipe)
   @Get()
   findAll(@Query() paginationQuery: PaginationQueryDto) {
     // findAll(@Res() response) {

@@ -253,3 +253,31 @@ ConfigModule
 - configService has get method to get config variables
 
 custom config files can group setting together
+
+SOLID PRINCIPLES
+- keeping code organized, with app dev building blocks
+- Exception filters
+    - control flow, content of response for exceptions
+- Pipes
+    - tranformation - input to desire output
+    - validation - if valid, let pass through pipe
+- Interceptors
+    - inspired by aspect
+    - bind logic before/after execution
+    - extend behavior
+    - or override a method
+        - like caching a response
+- Guards
+    - whether request meets condition, role, acl, authorization
+
+Understanding Binding Techniques (scopes)
+- Global
+    - APP_PIPE token
+    - validation pipe
+- Controller
+    @UsePipes() decorator
+- Method
+    @UsePipes() decorator
+- Param (pipes only)
+    when validation logic is on 1 parameter
+    @Body(ValidationPipe)

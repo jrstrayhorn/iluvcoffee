@@ -1,10 +1,14 @@
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  // limitation, can't inject dependency
+  // because outside context of module
   app.useGlobalPipes(
+    // scoped globally
     new ValidationPipe({
       whitelist: true,
       transform: true, // does primative type converstion for boolean/numbers, slight performance hit doing this so weight the cost if needed
@@ -14,6 +18,7 @@ async function bootstrap() {
       },
     }),
   );
+  app.useGlobalFilters(new HttpExceptionFilter());
   await app.listen(3000);
 }
 bootstrap();

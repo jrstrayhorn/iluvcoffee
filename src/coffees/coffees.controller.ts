@@ -33,7 +33,7 @@ export class CoffeesController {
   // @SetMetadata('isPublic', true) // should use custom decorator!!
   @Public()
   @Get()
-  findAll(@Query() paginationQuery: PaginationQueryDto) {
+  async findAll(@Query() paginationQuery: PaginationQueryDto) {
     // findAll(@Res() response) {
     // using the underlining response object from express or fastify
     // provides great flexibility to mess with headers etc
@@ -42,6 +42,7 @@ export class CoffeesController {
     // code is also harder to test
     // best practice use nest standard approach
     // response.status(200).send('this action returns all coffees');
+    await new Promise((resolve) => setTimeout(resolve, 5000));
     const { limit, offset } = paginationQuery;
     return this.coffeesService.findAll(paginationQuery);
     // return `This action returns all coffees. Limit: ${limit}, offset: ${offset}`;

@@ -10,9 +10,11 @@ import {
   Post,
   Query,
   Res,
+  SetMetadata,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
+import { Public } from 'src/common/decorators/public.decorator';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 import { CoffeesService } from './coffees.service';
 import { CreateCoffeeDto } from './dto/create-coffee.dto';
@@ -27,7 +29,9 @@ export class CoffeesController {
   // readonly so we won't be able to change it
   constructor(private readonly coffeesService: CoffeesService) {}
 
-  @UsePipes(ValidationPipe)
+  //@UsePipes(ValidationPipe)
+  // @SetMetadata('isPublic', true) // should use custom decorator!!
+  @Public()
   @Get()
   findAll(@Query() paginationQuery: PaginationQueryDto) {
     // findAll(@Res() response) {

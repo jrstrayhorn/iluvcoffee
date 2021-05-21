@@ -36,9 +36,8 @@ export class CoffeesService {
     private readonly coffeeRepository: Repository<Coffee>,
     @InjectRepository(Flavor)
     private readonly flavorRepository: Repository<Flavor>,
-    private readonly connection: Connection,
-  ) // @Inject(COFFEE_BRANDS) coffeeBrands: string[],
-  // @Inject(coffeesConfig.KEY)
+    private readonly connection: Connection, // @Inject(COFFEE_BRANDS) coffeeBrands: string[],
+  ) // @Inject(coffeesConfig.KEY)
   // private readonly coffeesConfiguration: ConfigType<typeof coffeesConfig>,
   {
     // instead of private readonly configService: ConfigService,
@@ -82,7 +81,7 @@ export class CoffeesService {
     });
     if (!coffee) {
       //throw new HttpException(`Coffee ${id} not found`, HttpStatus.NOT_FOUND);
-      throw new NotFoundException(`Coffee ${id} not found`);
+      throw new NotFoundException(`Coffee #${id} not found`);
     }
     return coffee;
   }

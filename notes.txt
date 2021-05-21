@@ -291,3 +291,6 @@ Open API Specification
 NEST has dedicated module that can generate Open API spec
 
 npm i @nestjs/swagger swagger-ui-express
+
+to run test on an individual file
+npm run test:watch -- coffees.service

@@ -37,13 +37,13 @@ export class CoffeesService {
     @InjectRepository(Flavor)
     private readonly flavorRepository: Repository<Flavor>,
     private readonly connection: Connection,
-    @Inject(COFFEE_BRANDS) coffeeBrands: string[],
-    @Inject(coffeesConfig.KEY)
-    private readonly coffeesConfiguration: ConfigType<typeof coffeesConfig>,
-  ) {
+  ) // @Inject(COFFEE_BRANDS) coffeeBrands: string[],
+  // @Inject(coffeesConfig.KEY)
+  // private readonly coffeesConfiguration: ConfigType<typeof coffeesConfig>,
+  {
     // instead of private readonly configService: ConfigService,
     // console.log(coffeeBrands);
-    console.log('CoffeeService instantiated');
+    // console.log('CoffeeService instantiated');
     // see type <string>, real value is string
     // regardless of type, get will always return a string
     // every env variable is a string by default
@@ -61,7 +61,7 @@ export class CoffeesService {
     // const coffeesConfig = this.configService.get('coffees.foo');
     // console.log(coffeesConfig);
     // automatic infers the type giving us type safety and intellisense
-    console.log(coffeesConfiguration.foo);
+    // console.log(coffeesConfiguration.foo);
   }
 
   findAll(paginationQuery: PaginationQueryDto) {

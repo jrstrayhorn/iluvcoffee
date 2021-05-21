@@ -281,3 +281,13 @@ Understanding Binding Techniques (scopes)
 - Param (pipes only)
     when validation logic is on 1 parameter
     @Body(ValidationPipe)
+
+Open API Specification
+- operations
+- input parameters
+- responses
+- authentication
+
+NEST has dedicated module that can generate Open API spec
+
+npm i @nestjs/swagger swagger-ui-express

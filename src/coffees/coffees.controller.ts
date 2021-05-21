@@ -14,7 +14,7 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
-import { ApiForbiddenResponse, ApiResponse } from '@nestjs/swagger';
+import { ApiForbiddenResponse, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Protocol } from 'src/common/decorators/protocol.decorator';
 import { Public } from 'src/common/decorators/public.decorator';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
@@ -25,6 +25,7 @@ import { UpdateCoffeeDto } from './dto/update-coffee.dto';
 
 // 'coffees' ties route /coffees to this controller
 // still need HTTP verb method
+@ApiTags('coffees')
 @Controller('coffees')
 //@UsePipes(new ValidationPipe()) // can pass in config object now, use class tho
 export class CoffeesController {

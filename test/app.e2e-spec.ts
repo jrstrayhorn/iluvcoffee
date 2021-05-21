@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
-import * as request from 'supertest';
+import * as request from 'supertest'; // highlevel abstraction over http requests
 import { AppModule } from './../src/app.module';
 
 describe('AppController (e2e)', () => {
@@ -11,8 +11,10 @@ describe('AppController (e2e)', () => {
       imports: [AppModule],
     }).compile();
 
+    // need to get an actual runtime environemnt
+    // saving the running app
     app = moduleFixture.createNestApplication();
-    await app.init();
+    await app.init(); // have to call this, to mount routes and lifecycle hooks
   });
 
   it('/ (GET)', () => {

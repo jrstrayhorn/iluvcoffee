@@ -1,7 +1,9 @@
-import { INestApplication } from '@nestjs/common';
+import { HttpStatus, INestApplication, ValidationPipe } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CoffeesModule } from 'src/coffees/coffees.module';
+import { CreateCoffeeDto } from 'src/coffees/dto/create-coffee.dto';
+import * as request from 'supertest';
 
 // 3 choices for e2e database tests
 // #1 - Mock Interactions with the Database (repositories and so forth) - lots of effort to maintain
@@ -10,6 +12,11 @@ import { CoffeesModule } from 'src/coffees/coffees.module';
 // then add some pre/post test script to spin up and tear down test db container with test runs
 
 describe('[Feature] Coffees - /coffees', () => {
+  const coffee = {
+    name: 'Shipwreck Roast',
+    brand: 'Buddy Brew',
+    flavors: ['chocolate', 'vanilla'],
+  };
   let app: INestApplication;
 
   beforeAll(async () => {
@@ -30,11 +37,36 @@ describe('[Feature] Coffees - /coffees', () => {
     }).compile();
 
     app = moduleFixture.createNestApplication();
+    app.useGlobalPipes(
+      // scoped globally
+      new ValidationPipe({
+        whitelist: true,
+        transform: true, // does primative type converstion for boolean/numbers, slight performance hit doing this so weight the cost if needed
+        forbidNonWhitelisted: true,
+        transformOptions: {
+          enableImplicitConversion: true, // will automatically convert to TS type - dont need to use @Type decorator on dtos
+        },
+      }),
+    );
     await app.init();
   });
 
   // track tests that need to be done in the future
-  it.todo('Create [POST /]');
+  it('Create [POST /]', () => {
+    return request(app.getHttpServer())
+      .post('/coffees')
+      .send(coffee as CreateCoffeeDto)
+      .expect(HttpStatus.CREATED)
+      .then(({ body }) => {
+        const expectedCoffee = jasmine.objectContaining({
+          ...coffee,
+          flavors: jasmine.arrayContaining(
+            coffee.flavors.map((name) => jasmine.objectContaining({ name })),
+          ),
+        });
+        expect(body).toEqual(expectedCoffee);
+      });
+  });
   it.todo('Get all [GET /]');
   it.todo('Get one [GET /:id]');
   it.todo('Update one [PATCH /:id]');

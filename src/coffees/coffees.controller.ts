@@ -32,20 +32,20 @@ export class CoffeesController {
     // code is also harder to test
     // best practice use nest standard approach
     // response.status(200).send('this action returns all coffees');
-    const { limit, offset } = paginationQuery;
+    //const { limit, offset } = paginationQuery;
     return this.coffeesService.findAll();
     // return `This action returns all coffees. Limit: ${limit}, offset: ${offset}`;
   }
 
   @Get(':id')
-  findOne(@Param('id') id: number) {
+  findOne(@Param('id') id: string) {
     // validation pipe will try to convert the string to number with transform is true
     // just @Param() params gives us all items in request parameters
     // so we'd need to do params.id to get value
     // give value in @Param() to get specific parameter
     // return `This action returns ${id} coffee`;
-    console.log(typeof id);
-    return this.coffeesService.findOne('' + id);
+    // console.log(typeof id);
+    return this.coffeesService.findOne(id);
   }
 
   // @Post()
